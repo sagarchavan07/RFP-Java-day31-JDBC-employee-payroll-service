@@ -38,13 +38,27 @@ public class EmployeePayrollService {
 
         assert connection != null;
         PreparedStatement preparedStatement = connection.prepareStatement(("select * from employee_payroll where salary between ? and ?"));
-        preparedStatement.setDouble(1,minSalary);
-        preparedStatement.setDouble(2,maxSalary);
+        preparedStatement.setDouble(1, minSalary);
+        preparedStatement.setDouble(2, maxSalary);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             employeePayrollDataList.add(new EmployeePayrollData(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getDate(5)));
         }
-        employeePayrollDataList.forEach(data-> System.out.println(data));
+        employeePayrollDataList.forEach(data -> System.out.println(data));
         connection.close();
+    }
+
+    public void getSumOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JDBCConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT gender,count(*),SUM(salary) FROM employee_payroll GROUP BY gender;");
+        System.out.println("gender count SUM(salary)");
+        while (resultSet.next()) {
+            System.out.println(
+                    resultSet.getString(1) + "\t"
+                            + resultSet.getInt(2) + "\t"
+                            + resultSet.getDouble(3)
+            );
+        }
     }
 }
