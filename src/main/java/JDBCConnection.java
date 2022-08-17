@@ -13,7 +13,7 @@ public class JDBCConnection {
             System.out.println("can't find the driver in the classpath!");
         }
 
-        listDrivers();
+//        listDrivers();
         try {
             connection = DriverManager.getConnection(URL, USER, PASS);
 
