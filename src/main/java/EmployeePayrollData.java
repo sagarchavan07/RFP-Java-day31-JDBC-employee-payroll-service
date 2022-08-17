@@ -4,10 +4,10 @@ public class EmployeePayrollData {
     private int id;
     private String name;
     private String gender;
-    private int salary;
+    private double salary;
     private Date start_date;
 
-    public EmployeePayrollData(int id, String name, String gender, int salary, Date start_date) {
+    public EmployeePayrollData(int id, String name, String gender, double salary, Date start_date) {
         this.id = id;
         this.name = name;
         this.gender = gender;
